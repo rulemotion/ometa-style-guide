@@ -43,13 +43,13 @@ Limit all lines to a maximum of 79 characters.
 Separate rule groups with a single blank line.
 
 ```
-	ometa ometaParser {
-		ruleGroup1 =
+	ometa OmetaParser {
+		RuleGroup1 =
 			:ruleBody,
 		
-		ruleGroup2a =
+		RuleGroup2a =
 			:ruleBody,
-		ruleGroup2b
+		RuleGroup2b
 			:ruleBody
 	}
 ```
@@ -85,11 +85,11 @@ Within the define declare a var with the name of OMeta object and then return th
 
 ```
 define(['ometa/ometa-base'], function() {
-	var ometaParser;
-	ometa ometaParser {
+	var OmetaParser;
+	ometa OmetaParser {
 
 	}
-	return ometaParser;
+	return OmetaParser;
 });
 ```
 
@@ -101,12 +101,12 @@ Avoid extraneous whitespace in the following situations:
 - Immediately inside parentheses, brackets or braces
 
 	```
-		ometa ometaParser {
-			ruleWithArgs :arg =
+		ometa OmetaParser {
+			RuleWithArgs :arg =
 				empty,
-			rule1 =
+			Rule1 =
 				ruleWithArgs('a'), // Yes
-			rule2 =
+			Rule2 =
 				ruleWithArgs('a') // No
 		}
 	```
@@ -114,12 +114,12 @@ Avoid extraneous whitespace in the following situations:
 - Immediately before a comma
 
 	```
-		ometa ometaParser {
-			ruleWithArgs :arg :arg2 =
+		ometa OmetaParser {
+			RuleWithArgs :arg :arg2 =
 				empty,
-			rule1 =
+			Rule1 =
 				ruleWithArgs('a', 'b'), // Yes
-			rule2 =
+			Rule2 =
 				ruleWithArgs('a' , 'b') // No
 		}
 	```
@@ -143,7 +143,7 @@ Each line of a block comment starts with a `*` and a single space, and should be
 Paragraphs inside of block comments are separated by a line containing a single `*`.
 
 ```
-	ometa ometaParser {
+	ometa OmetaParser {
 		/*
 		* This is a block comment. Note that if this were a real block
 		* comment, we would actually be describing the proceeding code.
@@ -152,7 +152,7 @@ Paragraphs inside of block comments are separated by a line containing a single 
 		* that this paragraph was separated from the previous paragraph
 		* by a line containing a single comment character.
 		*/
-		rule =
+		Rule =
 			:ruleBody
 	}
 ```
@@ -182,12 +182,12 @@ Use `CamelCase` (with a leading uppercase character) to name all classes and rul
 Within the OMeta block use one line for the rule and its parameters and start the rule body indented one level on the next line:
 
 ```
-	ometa ometaParser {
-		rule :param1 :param2 =
+	ometa OmetaParser {
+		Rule :param1 :param2 =
 			:ruleBody,
-		rule2 =
+		Rule2 =
 			:ruleBody,
-		rule3
+		Rule3
 			:ruleBody
 	}
 ```
@@ -195,22 +195,22 @@ Within the OMeta block use one line for the rule and its parameters and start th
 For cases where you override the default return it should be on a new line:
 
 ```
-	ometa ometaParser {
-		rule :param1 :param2 =
+	ometa OmetaParser {
+		Rule :param1 :param2 =
 			:ruleBody
 			-> 'ReturnValue',
 
-		rule2 =
+		Rule2 =
 			(
 				:ruleBodyPart
 				-> 'ReturnValue'
 			)*:ruleBody
-		rule3 =
+		Rule3 =
 			(	:ruleBodyPart
 				-> 'ReturnValue'
 			)*:ruleBody
 
-		rule4 =
+		Rule4 =
 			(	:ruleBody
 			|	:ruleBody2
 				-> 'ReturnValue'
@@ -222,21 +222,21 @@ For cases where you override the default return it should be on a new line:
 Rules with | in them.
 
 ```
-	ometa ometaParser {
-		rule =
+	ometa OmetaParser {
+		Rule =
 			(	:ruleBody
 			|	:ruleBody2
 				-> 'ReturnValue'
 			)
 			-> 'ReturnValue'
-		rule2 =
+		Rule2 =
 			(
 				:ruleBody
 			|	:ruleBody2
 				-> 'ReturnValue'
 			)
 			-> 'ReturnValue'
-		rule3 = // Avoid
+		Rule3 = // Avoid
 				:ruleBody
 			|	:ruleBody2
 				-> 'ReturnValue'
@@ -272,11 +272,11 @@ Write the annotation on the line immediately above the code that the annotation 
 The annotation keyword should be followed by a colon and a space, and a descriptive note.
 
 ```
-	ometa ometaParser {
+	ometa OmetaParser {
 		// TODO: Make this rule do something.
-		ruleWithArgs :arg =
+		RuleWithArgs :arg =
 			empty,
-		rule1 =
+		Rule1 =
 			ruleWithArgs('a')
 	}
 ```
@@ -284,12 +284,12 @@ The annotation keyword should be followed by a colon and a space, and a descript
 If multiple lines are required by the description, indent subsequent lines with a tab:
 
 ```
-	ometa ometaParser {
+	ometa OmetaParser {
 		// TODO: Make this rule do something
 			and go onto the next line.
-		ruleWithArgs :arg =
+		RuleWithArgs :arg =
 			empty,
-		rule1 =
+		Rule1 =
 			ruleWithArgs('a')
 	}
 ```
