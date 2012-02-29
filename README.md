@@ -6,24 +6,23 @@ The details in this guide have been very heavily inspired by the [CoffeeScript S
 
 ## Table of Contents
 
-* [The CoffeeScript Style Guide](#guide)
-		* [Code Layout](#code_layout)
-				* [Tabs or Spaces?](#tabs_or_spaces)
-				* [Maximum Line Length](#maximum_line_length)
-				* [Blank Lines](#blank_lines)
-				* [Trailing Whitespace](#trailing_whitespace)
-				* [Encoding](#encoding)
-		* [Module Definition](#module_definition)
-		* [Whitespace in Expressions and Statements](#whitespace)
-		* [Comments](#comments)
-				* [Block Comments](#block_comments)
+* [The OMeta Style Guide](#guide)
+	* [Code Layout](#code_layout)
+		* [Tabs or Spaces?](#tabs_or_spaces)
+		* [Maximum Line Length](#maximum_line_length)
+		* [Blank Lines](#blank_lines)
+		* [Trailing Whitespace](#trailing_whitespace)
+		* [Encoding](#encoding)
+	* [Module Definition](#module_definition)
+	* [Whitespace in Expressions and Statements](#whitespace)
+	* [Comments](#comments)
+		* [Block Comments](#block_comments)
 				* [Inline Comments](#inline_comments)
-		* [Naming Conventions](#naming_conventions)
-		* [Rules](#rules)
-		* [Strings](#strings)
-		* [Extending Native Objects](#extending_native_objects)
-		* [Annotations](#annotations)
-		* [Miscellaneous](#miscellaneous)
+	* [Naming Conventions](#naming_conventions)
+	* [Rules](#rules)
+	* [Strings](#strings)
+	* [Extending Native Objects](#extending_native_objects)
+	* [Annotations](#annotations)
 
 <a name="code_layout"/>
 ## Code layout
@@ -42,6 +41,8 @@ Limit all lines to a maximum of 79 characters.
 ### Blank Lines
 
 Separate rule groups with a single blank line.
+
+```
 	ometa ometaParser {
 		ruleGroup1 =
 			:ruleBody,
@@ -51,6 +52,7 @@ Separate rule groups with a single blank line.
 		ruleGroup2b
 			:ruleBody
 	}
+```
 
 Separate javascript function definitions with a single blank line.
 
@@ -72,13 +74,16 @@ Wrap in a define, with a list of dependencies, these dependencies should be grou
 2. ometa/ometa-base
 3. Non-referenced dependencies.
 
+```
 define([..., 'ometa/ometa-base', ...], function(...) {
 
 
 });
+```
 
 Within the define declare a var with the name of OMeta object and then return that variable, this is to stop the global namespace from being polluted:
 
+```
 define(['ometa/ometa-base'], function() {
 	var ometaParser;
 	ometa ometaParser {
@@ -86,6 +91,7 @@ define(['ometa/ometa-base'], function() {
 	}
 	return ometaParser;
 });
+```
 
 <a name="whitespace"/>
 ## Whitespace in Expressions and Statements
@@ -94,25 +100,29 @@ Avoid extraneous whitespace in the following situations:
 
 - Immediately inside parentheses, brackets or braces
 
-	ometa ometaParser {
-		ruleWithArgs :arg =
-			empty,
-		rule1 =
-			ruleWithArgs('a'), // Yes
-		rule2 =
-			ruleWithArgs('a') // No
-	}
+	```
+		ometa ometaParser {
+			ruleWithArgs :arg =
+				empty,
+			rule1 =
+				ruleWithArgs('a'), // Yes
+			rule2 =
+				ruleWithArgs('a') // No
+		}
+	```
 
 - Immediately before a comma
 
-	ometa ometaParser {
-		ruleWithArgs :arg :arg2 =
-			empty,
-		rule1 =
-			ruleWithArgs('a', 'b'), // Yes
-		rule2 =
-			ruleWithArgs('a' , 'b') // No
-	}
+	```
+		ometa ometaParser {
+			ruleWithArgs :arg :arg2 =
+				empty,
+			rule1 =
+				ruleWithArgs('a', 'b'), // Yes
+			rule2 =
+				ruleWithArgs('a' , 'b') // No
+		}
+	```
 
 <a name="comments"/>
 ## Comments
@@ -132,6 +142,7 @@ Each line of a block comment starts with a `*` and a single space, and should be
 
 Paragraphs inside of block comments are separated by a line containing a single `*`.
 
+```
 	ometa ometaParser {
 		/*
 		* This is a block comment. Note that if this were a real block
@@ -144,6 +155,7 @@ Paragraphs inside of block comments are separated by a line containing a single 
 		rule =
 			:ruleBody
 	}
+```
 
 <a name="inline_comments"/>
 ### Inline Comments
@@ -168,6 +180,8 @@ Use `CamelCase` (with a leading uppercase character) to name all classes and rul
 ## Rules
 
 Within the OMeta block use one line for the rule and its parameters and start the rule body indented one level on the next line:
+
+```
 	ometa ometaParser {
 		rule :param1 :param2 =
 			:ruleBody,
@@ -176,8 +190,11 @@ Within the OMeta block use one line for the rule and its parameters and start th
 		rule3
 			:ruleBody
 	}
+```
 
 For cases where you override the default return it should be on a new line:
+
+```
 	ometa ometaParser {
 		rule :param1 :param2 =
 			:ruleBody
@@ -200,8 +217,11 @@ For cases where you override the default return it should be on a new line:
 			)
 			-> 'ReturnValue'
 	}
+```
 
 Rules with | in them.
+
+```
 	ometa ometaParser {
 		rule =
 			(	:ruleBody
@@ -221,18 +241,19 @@ Rules with | in them.
 			|	:ruleBody2
 				-> 'ReturnValue'
 	}
-
-
+```
 
 <a name="strings"/>
 ## Strings
 
 Use only quoted strings (`''` and `""1) instead of the OMeta specific string options such as (```, `#`).
 
+```
 'this is a string' // Yes
 "this is a string" // Yes
 `string // No
 #string // No
+```
 
 <a name="#extending_native_objects"/>
 ## Extending Native Objects
@@ -250,6 +271,7 @@ Write the annotation on the line immediately above the code that the annotation 
 
 The annotation keyword should be followed by a colon and a space, and a descriptive note.
 
+```
 	ometa ometaParser {
 		// TODO: Make this rule do something.
 		ruleWithArgs :arg =
@@ -257,9 +279,11 @@ The annotation keyword should be followed by a colon and a space, and a descript
 		rule1 =
 			ruleWithArgs('a')
 	}
+```
 
 If multiple lines are required by the description, indent subsequent lines with a tab:
 
+```
 	ometa ometaParser {
 		// TODO: Make this rule do something
 			and go onto the next line.
@@ -268,6 +292,7 @@ If multiple lines are required by the description, indent subsequent lines with 
 		rule1 =
 			ruleWithArgs('a')
 	}
+```
 
 Annotation types:
 
@@ -279,9 +304,5 @@ Annotation types:
 
 If a custom annotation is required, the annotation should be documented in the project's README.
 
-<a name="miscellaneous"/>
-## Miscellaneous
 
-
-
-[coffeescript-style-guide]:: https://github.com/polarmobile/coffeescript-style-guide
+[coffeescript-style-guide]: https://github.com/polarmobile/coffeescript-style-guide
