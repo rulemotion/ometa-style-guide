@@ -246,7 +246,7 @@ Rules with | in them.
 <a name="strings"/>
 ## Strings
 
-Use only quoted strings (`''` and `""1) instead of the OMeta specific string options such as (```, `#`).
+Use only quoted strings (`''` and `""`) instead of the OMeta specific string options such as (``` ` ```, `#`).
 
 ```
 'this is a string' // Yes
@@ -306,3 +306,4 @@ If a custom annotation is required, the annotation should be documented in the p
 
 
 [coffeescript-style-guide]: https://github.com/polarmobile/coffeescript-style-guide
+[camel-case-variations]: http://en.wikipedia.org/wiki/CamelCase#Variations_and_synonyms
